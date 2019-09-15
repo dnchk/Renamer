@@ -21,13 +21,23 @@ void RenameManager::numerateFiles(size_t firstNum, bool reverse) {
 
 	std::string path = "";
 	std::string nameNum = "";
+	std::string newPath = "";
 	size_t i = reverse ? (firstNum + pathsNFilesNumberNames.size() - 1) : firstNum;
 
 	for (auto pathNFileNumberName : pathsNFilesNumberNames) {
 		path = std::get<0>(pathNFileNumberName);
-		nameNum = reverse ? (std::to_string(i--)) : (std::to_string(i++));
-		fs::rename(path, directory + "/" + nameNum + ".jpg");
+		nameNum = reverse ? std::to_string(i--) : std::to_string(i++);
+		newPath = directory + "/" + nameNum + ".jpg";
+		fs::rename(path, newPath);
 	}
+
+	/* // smth like that
+	size_t size = pathsNFilesNumberNames.size();
+	for (size_t k = 0; k < size / 2; ++k) {
+		path = std::get<0>(pathsNFilesNumberNames.at(k));
+		newPath = directory + "/" + std::to_string(k--) + ".jpg";
+		fs::swap(path, newPath);
+	}*/
 }
 
 void RenameManager::extractFileNames() {
