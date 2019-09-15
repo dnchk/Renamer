@@ -15,15 +15,18 @@ void RenameManager::readDirectory() {
 	}
 }
 
-void RenameManager::renameFilesNumeric(size_t firstNum = 1) {
+void RenameManager::numerateFiles(size_t firstNum, bool reverse) {
 	orderPathsNamesTuple();
 	sortPathsNFilesNames();
 
-	size_t i = firstNum;
 	std::string path = "";
+	std::string nameNum = "";
+	size_t i = reverse ? (firstNum + pathsNFilesNumberNames.size() - 1) : firstNum;
+
 	for (auto pathNFileNumberName : pathsNFilesNumberNames) {
 		path = std::get<0>(pathNFileNumberName);
-		fs::rename(path, directory + "/" + std::to_string(i++) + ".jpg");
+		nameNum = reverse ? (std::to_string(i--)) : (std::to_string(i++));
+		fs::rename(path, directory + "/" + nameNum + ".jpg");
 	}
 }
 

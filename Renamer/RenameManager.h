@@ -23,7 +23,7 @@ public:
 		: directory(dir) {}
 	
 	void readDirectory();
-	void renameFilesNumeric(size_t firstNum);
+	void numerateFiles(size_t firstNum = 1, bool reverse = false);
 	void printPathsNFilesNumberNames();
 	void printPaths();
 };
