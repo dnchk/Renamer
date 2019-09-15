@@ -1,9 +1,3 @@
-#include <iostream>
-#include <filesystem>
-#include <string>
-#include <vector>
-#include <cstdio>
-
 #include "RenameManager.h"
 
 // TO DO: 
