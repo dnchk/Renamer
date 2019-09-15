@@ -69,8 +69,8 @@ void RenameManager::orderPathsNamesTuple() {
 
 void RenameManager::sortPathsNFilesNames() {
 	std::sort(pathsNFilesNumberNames.begin(), pathsNFilesNumberNames.end(),
-		[](const std::tuple<std::string, const int>& a, std::tuple<std::string, int>& b) ->bool {
-		return std::get<1>(a) < std::get<1>(b);
+		[](const std::tuple<std::string, int>& a, const std::tuple<std::string, int>& b) -> bool {
+			return std::get<1>(a) < std::get<1>(b);
 	});
 }
 
