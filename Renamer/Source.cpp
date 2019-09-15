@@ -9,7 +9,7 @@
 int main() {
 	std::string path = "D:/University/current/DO/1";
 	int firstNum = 1;
-	bool reverse = false;
+	bool reverse = true;
 
 	RenameManager * rm = new RenameManager(path);
 	rm->readDirectory();
