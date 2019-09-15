@@ -24,3 +24,12 @@ x64/Debug/Renamer.pdb
 *.db
 *.ipch
 *.ipch
+*.log
+*.ipch
+*.db
+.vs/Renamer/v15/.suo
+.vs/Renamer/v15/Browse.VC.db
+.vs/Renamer/v15/ipch/AutoPCH/3a325fc2050cea7c/SOURCE.ipch
+.vs/Renamer/v15/ipch/AutoPCH/72fed8e3ad8a615a/RENAMEMANAGER.ipch
+Renamer/x64/Debug/Renamer.Build.CppClean.log
+Renamer/x64/Debug/Renamer.log
