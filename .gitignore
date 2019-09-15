@@ -19,3 +19,8 @@ Renamer/x64/Debug/vc141.pdb
 x64/Debug/Renamer.exe
 x64/Debug/Renamer.ilk
 x64/Debug/Renamer.pdb
+.vs/Renamer/v15/Browse.VC.db
+.vs/Renamer/v15/ipch/AutoPCH/72fed8e3ad8a615a/RENAMEMANAGER.ipch
+*.db
+*.ipch
+*.ipch
