@@ -20,28 +20,55 @@ void RenameManager::numerateFiles(size_t firstNum, bool reverse) {
 	sortPathsNFilesNames();
 
 	fs::path path = "";
-	size_t i = reverse ? (firstNum + pathsNFilesNumberNames.size() - 1) : firstNum;
+	size_t i = firstNum;
+
+	std::string nameNum = "";
+	std::string newPath = "";
 
 	if (reverse) {
-		/* NOTE: swap only swaps, not renames files, lol
-				 looks like it is necessary to create temp folder,
-				 move there second half of the files, rename first part,
-				 rename second - and then move second part of files where it belongs
-		*/
-		/*size_t size = pathsNFilesNumberNames.size();
-		fs::path swapPath = "";
-		// NOTE: decrease, so paths.at(i) would not be out of range
-		i--;
-		for (size_t k = 0; k < size / 2; ++k) {
-			path = std::get<0>(pathsNFilesNumberNames.at(k));
-			swapPath = paths.at(i--);
-			fs::swap(path, swapPath);
-		}*/
+		size_t size = pathsNFilesNumberNames.size();
+		size_t halfSize = size / 2;
+		size_t o = size;
+		
+		fs::path storagePath = fs::path(directory) / "storageFolder";
+		fs::path target;
+
+		try {
+			fs::create_directory(storagePath);
+
+			// move first half of files to storage directory
+			for (size_t k = 0; k < halfSize; ++k) {
+				path = std::get<0>(pathsNFilesNumberNames.at(k));
+				target = storagePath / path.filename();
+				fs::copy_file(path, target);
+				fs::remove(path);
+				// and rename there
+				nameNum = std::to_string(o--);
+				newPath = storagePath.string() + "/" + nameNum + ".jpg";
+				fs::rename(target, newPath);
+			}
+			// rename second half
+			for (size_t p = size - 1; p >= halfSize; --p) {
+				path = std::get<0>(pathsNFilesNumberNames.at(p));
+				nameNum = std::to_string(i++);
+				newPath = directory + "/" + nameNum + ".jpg";
+				fs::rename(path, newPath);
+			}
+			// return renamed first half to base folder
+			for (const auto & entry : fs::directory_iterator(storagePath)) {
+				path = entry.path();
+				target = directory / path.filename();
+				fs::copy_file(path, target);
+			}
+			// then delete storage dir
+			fs::remove_all(storagePath);
+		}
+		catch (std::exception ex) {
+			std::cout << ex.what() << "\n";
+		}
+
 	}
 	else {
-		std::string nameNum = "";
-		std::string newPath = "";
-
 		for (auto pathNFileNumberName : pathsNFilesNumberNames) {
 			path = std::get<0>(pathNFileNumberName);
 			nameNum = std::to_string(i++);

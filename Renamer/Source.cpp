@@ -1,14 +1,14 @@
 #include "RenameManager.h"
 
-// TO DO: 
-// reverse after straight order issue
+// TO DO:
 // solve issue when renaming occurs not first time, but with different first image name
+// can performance be improved with threads?
 // implement other types of functionality (renaming cases, other file formats), create ui
 
 int main() {
-	std::string path = "D:/University/current/DO/1";
+	std::string path = "D:/University/current/DO/2";
 	int firstNum = 1;
-	bool reverse = true;
+	bool reverse = false;
 
 	RenameManager * rm = new RenameManager(path);
 	rm->readDirectory();
